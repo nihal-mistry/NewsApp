@@ -1,11 +1,12 @@
-package com.nihalmistry.newsapp
+package com.nihalmistry.newsapp.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.nihalmistry.newsapp.R
 
-class MainActivity : AppCompatActivity() {
+class NewsListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_news_list)
     }
 }
