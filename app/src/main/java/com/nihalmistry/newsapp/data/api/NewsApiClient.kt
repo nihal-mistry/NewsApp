@@ -1,4 +1,4 @@
-package com.nihalmistry.newsapp.data
+package com.nihalmistry.newsapp.data.api
 
 import com.nihalmistry.newsapp.BuildConfig
 import okhttp3.OkHttpClient

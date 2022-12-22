@@ -1,54 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_height="wrap_content"
-    android:layout_width="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="?attr/selectableItemBackground">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+        <variable
+            name="article"
+            type="com.nihalmistry.newsapp.data.api_models.NewsArticle" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_height="250dp">
+        android:background="?attr/selectableItemBackground">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/bg"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            tools:src="@tools:sample/backgrounds/scenic"
-            />
+            android:layout_height="250dp">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/news_item_bg_gradient"/>
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/bg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                imageUrl="@{article.urlToImage}"
+                tools:src="@tools:sample/backgrounds/scenic" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_title"
-            android:layout_width="0dp"
-            android:layout_margin="8dp"
-            style="@style/TextAppearance.Material3.TitleMedium"
-            android:textColor="@color/white"
-            android:textStyle="bold"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/tv_description"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:text="SWOT satellite launches to measure Earth's water levels - Electronics Weekly" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/news_item_bg_gradient" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_description"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="8dp"
-            style="@style/TextAppearance.Material3.BodySmall"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/tv_title"
-            app:layout_constraintStart_toStartOf="@+id/tv_title"
-            app:layout_constraintVertical_bias="0"
-            tools:text="SWOT, a UK-backed mission to observe huge swathes of ocean and surface water in unprecedented detail has launched into space. Dubbed SWOT (Surface Water" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.cardview.widget.CardView>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_title"
+                android:layout_width="0dp"
+                android:layout_margin="8dp"
+                style="@style/TextAppearance.Material3.TitleMedium"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:text="@{article.title}"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/tv_description"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="SWOT satellite launches to measure Earth's water levels - Electronics Weekly" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="8dp"
+                style="@style/TextAppearance.Material3.BodySmall"
+                android:textColor="@color/white"
+                android:text="@{article.description}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/tv_title"
+                app:layout_constraintStart_toStartOf="@+id/tv_title"
+                app:layout_constraintVertical_bias="0"
+                tools:text="SWOT, a UK-backed mission to observe huge swathes of ocean and surface water in unprecedented detail has launched into space. Dubbed SWOT (Surface Water" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

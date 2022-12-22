@@ -1,6 +1,6 @@
-package com.nihalmistry.newsapp.data
+package com.nihalmistry.newsapp.data.api
 
-import com.nihalmistry.newsapp.data.models.GetTopHeadlinesResponse
+import com.nihalmistry.newsapp.data.api_models.GetTopHeadlinesResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

@@ -1,4 +1,4 @@
-package com.nihalmistry.newsapp.data.models
+package com.nihalmistry.newsapp.data.api_models
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
