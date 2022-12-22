@@ -31,7 +31,7 @@ class NewsListAdapter: Adapter<NewsListAdapter.NewsItemViewHolder>() {
         article?.let {
             holder.binding.article = it
             holder.itemView.setOnClickListener {
-                _clickLiveData.postValue(getItem(holder.adapterPosition))
+                _clickLiveData.postValue(getItem(holder.bindingAdapterPosition))
             }
         }
     }

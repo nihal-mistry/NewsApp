@@ -12,7 +12,8 @@
     <androidx.cardview.widget.CardView
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:background="?attr/selectableItemBackground">
+        android:background="?attr/selectableItemBackground"
+        app:cardCornerRadius="16dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
