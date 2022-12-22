@@ -16,7 +16,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="250dp">
+            android:layout_height="250dp"
+            android:background="?attr/selectableItemBackground">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/bg"

@@ -1,5 +1,6 @@
 package com.nihalmistry.newsapp.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
@@ -32,6 +33,12 @@ class NewsListActivity : AppCompatActivity() {
 
         newsListVM.uiModel.observe(this) {
             binding.invalidateAll()
+        }
+
+        adapter.getArticleClickLiveData().observe(this) {
+            val intent = Intent(this@NewsListActivity, NewsDetailActivity::class.java)
+            intent.putExtra("article", it)
+            startActivity(intent)
         }
 
         newsListVM.refreshTopHeadlines()
