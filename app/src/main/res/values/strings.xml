@@ -3,4 +3,5 @@
     <string name="empty_string" />
     <string name="failed_to_fetch_news">Failed to fetch news</string>
     <string name="select_language">Select Language</string>
+    <string name="retry">RETRY</string>
 </resources>

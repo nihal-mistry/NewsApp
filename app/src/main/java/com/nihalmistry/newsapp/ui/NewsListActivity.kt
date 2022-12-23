@@ -30,7 +30,7 @@ class NewsListActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
     val newsListVM by viewModel<NewsListViewModel>()
     val prefs by inject<SharedPreferences>(named(USER_PREFS))
 
-    val chooseCountryDialogFragment = ChooseCountryDialogFragment()
+    private val chooseCountryDialogFragment = ChooseCountryDialogFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +48,10 @@ class NewsListActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
         dividerItemDecoration.setDividerColorResource(this, android.R.color.transparent)
 
         binding.rvNews.addItemDecoration(dividerItemDecoration)
+
+        binding.btnRetry.setOnClickListener {
+            newsListVM.refreshTopHeadlines()
+        }
 
         newsListVM.articleList.observe(this) {
             adapter.submitList(it)

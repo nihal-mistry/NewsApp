@@ -21,7 +21,71 @@
             android:id="@+id/rv_news"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/item_news_list" />
+            tools:listitem="@layout/item_news_list"
+            showIf="@{!viewModel.uiModel.showProgress &amp;&amp; !viewModel.uiModel.showError}"
+            tools:visibility="invisible"/>
 
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/news_loader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_error_title"
+            android:layout_width="0dp"
+            android:gravity="center"
+            style="@style/TextAppearance.Material3.TitleMedium"
+            android:layout_margin="8dp"
+            android:text="@{viewModel.uiModel.errorTitle}"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/news_loader"
+            tools:text="Failed to get news" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_error_description"
+            android:layout_width="0dp"
+            android:gravity="center"
+            android:textColor="@android:color/darker_gray"
+            style="@style/TextAppearance.Material3.BodySmall"
+            android:layout_margin="8dp"
+            android:text="@{viewModel.uiModel.errorDescription}"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_error_title"
+            tools:text="Error description" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_retry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/retry"
+            android:textSize="12sp"
+            android:layout_marginTop="8dp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_error_description" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/loading_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            showIf="@{viewModel.uiModel.showProgress}"
+            app:constraint_referenced_ids="news_loader" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/error_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            showIf="@{viewModel.uiModel.showError}"
+            app:constraint_referenced_ids="tv_error_title,tv_error_description, btn_retry"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

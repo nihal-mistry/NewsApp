@@ -24,8 +24,7 @@ class NewsListViewModel(
 
     fun refreshTopHeadlines() = viewModelScope.launch {
         emitUiState(NewsListUiModel(showProgress = true))
-        val result = newsRepository.getTopHeadlines()
-        when (result) {
+        when (val result = newsRepository.getTopHeadlines()) {
             is Result.Success -> {
                 _articleList.postValue(result.data)
                 emitUiState(NewsListUiModel())
