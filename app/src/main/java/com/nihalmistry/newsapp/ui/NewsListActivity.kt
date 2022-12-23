@@ -12,6 +12,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.divider.MaterialDividerItemDecoration
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.analytics.ktx.logEvent
+import com.google.firebase.ktx.Firebase
 import com.nihalmistry.newsapp.R
 import com.nihalmistry.newsapp.databinding.ActivityNewsListBinding
 import com.nihalmistry.newsapp.di.USER_PREFS
@@ -24,6 +28,8 @@ import org.koin.core.qualifier.named
 
 class NewsListActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
 
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
+
     private lateinit var binding: ActivityNewsListBinding
     private val adapter: NewsListAdapter = NewsListAdapter()
 
@@ -35,13 +41,23 @@ class NewsListActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_news_list)
+        firebaseAnalytics = Firebase.analytics
+
         binding.viewModel = newsListVM
 
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW) {
+            param(FirebaseAnalytics.Param.SCREEN_NAME, "News List")
+            param(FirebaseAnalytics.Param.SCREEN_CLASS, "NewsListActivity")
+        }
+
+
         binding.swipeRefresh.setOnRefreshListener {
+            firebaseAnalytics.logEvent("news_list_swipe_refresh") {}
             newsListVM.refreshTopHeadlines()
         }
 
         binding.btnRetry.setOnClickListener {
+            firebaseAnalytics.logEvent("news_list_retry_clicked", Bundle())
             newsListVM.refreshTopHeadlines()
         }
 
@@ -72,6 +88,10 @@ class NewsListActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
         }
 
         adapter.getArticleClickLiveData().observe(this) {
+            firebaseAnalytics.logEvent("news_list_item_clicked") {
+                param("news_title", it.title ?: "")
+                param("news_country", prefs.getString(COUNTRY_KEY, "us")!!)
+            }
             val intent = Intent(this@NewsListActivity, NewsDetailActivity::class.java)
             intent.putExtra("article", it)
             startActivity(intent)
@@ -79,7 +99,6 @@ class NewsListActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
 
         newsListVM.refreshTopHeadlines()
 
-        prefs.registerOnSharedPreferenceChangeListener(this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -92,10 +111,16 @@ class NewsListActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
         when(item.itemId) {
             R.id.language_menu -> showLanguagePopup()
         }
         return true
+    }
+
+    override fun onStart() {
+        super.onStart()
+        prefs.registerOnSharedPreferenceChangeListener(this)
     }
 
     override fun onStop() {
@@ -105,6 +130,7 @@ class NewsListActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
     }
 
     fun showLanguagePopup() {
+        firebaseAnalytics.logEvent("country_option_clicked") {}
         if (!chooseCountryDialogFragment.isAdded)
             chooseCountryDialogFragment.show(supportFragmentManager, "chooseCountry")
     }
@@ -114,6 +140,10 @@ class NewsListActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
             if (key == COUNTRY_KEY) {
                 binding.rvNews.smoothScrollToPosition(0)
                 newsListVM.refreshTopHeadlines()
+
+                firebaseAnalytics.logEvent("country_changed") {
+                    param("country", prefs.getString(COUNTRY_KEY, "us")!!)
+                }
             }
         }
     }
