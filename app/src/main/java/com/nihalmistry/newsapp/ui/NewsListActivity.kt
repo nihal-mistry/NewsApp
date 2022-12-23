@@ -37,6 +37,14 @@ class NewsListActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_news_list)
         binding.viewModel = newsListVM
 
+        binding.swipeRefresh.setOnRefreshListener {
+            newsListVM.refreshTopHeadlines()
+        }
+
+        binding.btnRetry.setOnClickListener {
+            newsListVM.refreshTopHeadlines()
+        }
+
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         binding.rvNews.layoutManager = layoutManager
@@ -49,16 +57,18 @@ class NewsListActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
 
         binding.rvNews.addItemDecoration(dividerItemDecoration)
 
-        binding.btnRetry.setOnClickListener {
-            newsListVM.refreshTopHeadlines()
-        }
+
 
         newsListVM.articleList.observe(this) {
             adapter.submitList(it)
+            binding.swipeRefresh.isRefreshing = false
         }
 
         newsListVM.uiModel.observe(this) {
             binding.invalidateAll()
+            if (it.showError) {
+                binding.swipeRefresh.isRefreshing = false
+            }
         }
 
         adapter.getArticleClickLiveData().observe(this) {

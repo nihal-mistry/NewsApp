@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "822897308364",
+    "project_id": "news-app-a3c7e",
+    "storage_bucket": "news-app-a3c7e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:822897308364:android:3f2f208e00080ed1e28869",
+        "android_client_info": {
+          "package_name": "com.nihalmistry.newsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "822897308364-3gagqjqc4j51tmi5872cs910bgoib8la.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nihalmistry.newsapp",
+            "certificate_hash": "4461ed48367930c34f559f6680e1c6d492650ab4"
+          }
+        },
+        {
+          "client_id": "822897308364-0d11v6sc1bno5j49si6pvcb0m3ieseog.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqGLBqWR4T6_hnWA7-c7ApCZTmno7OJg4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "822897308364-0d11v6sc1bno5j49si6pvcb0m3ieseog.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
