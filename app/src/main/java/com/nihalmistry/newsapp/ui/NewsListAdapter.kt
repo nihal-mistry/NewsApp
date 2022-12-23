@@ -11,12 +11,13 @@ import com.nihalmistry.newsapp.R
 import com.nihalmistry.newsapp.data.api_models.NewsArticle
 import com.nihalmistry.newsapp.databinding.ItemNewsListBinding
 
-class NewsListAdapter: Adapter<NewsListAdapter.NewsItemViewHolder>() {
+class NewsListAdapter : Adapter<NewsListAdapter.NewsItemViewHolder>() {
     private val items = mutableListOf<NewsArticle>()
 
     private val _clickLiveData = MutableLiveData<NewsArticle>()
 
-    inner class NewsItemViewHolder(val binding: ItemNewsListBinding): RecyclerView.ViewHolder(binding.root)
+    inner class NewsItemViewHolder(val binding: ItemNewsListBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsItemViewHolder {
         val binding = DataBindingUtil.inflate<ItemNewsListBinding>(

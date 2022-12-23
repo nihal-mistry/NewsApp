@@ -18,10 +18,13 @@ class NewsListViewModel(
 ) :
     BaseViewModel<NewsListUiModel>(dispatchers) {
 
+    // Store the list of articles fetched from API
     private val _articleList = MutableLiveData<List<NewsArticle>>()
     val articleList: LiveData<List<NewsArticle>>
         get() = _articleList
 
+    // Runs suspend function in viewModelScope to fetch news article from NewsRepository
+    // Emits UI state based on the API call result
     fun refreshTopHeadlines() = viewModelScope.launch {
         emitUiState(NewsListUiModel(showProgress = true))
         when (val result = newsRepository.getTopHeadlines()) {
@@ -36,6 +39,7 @@ class NewsListViewModel(
     }
 }
 
+// Data class to store UI state of NewsListActivity
 data class NewsListUiModel(
     val showProgress: Boolean = false,
     val showError: Boolean = false,

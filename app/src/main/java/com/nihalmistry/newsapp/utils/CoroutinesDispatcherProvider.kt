@@ -5,6 +5,7 @@ import kotlinx.coroutines.Dispatchers.Default
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 
+// Defines CoroutineDispatchers
 data class CoroutinesDispatcherProvider(
     val main: CoroutineDispatcher = Main,
     val computation: CoroutineDispatcher = Default,

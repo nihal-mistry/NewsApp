@@ -67,13 +67,12 @@ class NewsListActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
         binding.rvNews.setHasFixedSize(false)
         binding.rvNews.adapter = adapter
 
-        val dividerItemDecoration = MaterialDividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+        val dividerItemDecoration =
+            MaterialDividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         dividerItemDecoration.setDividerThicknessResource(this, R.dimen.news_list_divider_thickness)
         dividerItemDecoration.setDividerColorResource(this, android.R.color.transparent)
 
         binding.rvNews.addItemDecoration(dividerItemDecoration)
-
-
 
         newsListVM.articleList.observe(this) {
             adapter.submitList(it)
@@ -111,8 +110,7 @@ class NewsListActivity : AppCompatActivity(), OnSharedPreferenceChangeListener {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.language_menu -> showLanguagePopup()
         }
         return true

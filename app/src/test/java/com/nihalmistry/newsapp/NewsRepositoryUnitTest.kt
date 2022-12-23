@@ -24,6 +24,7 @@ class NewsRepositoryUnitTest {
 
     val newsRepository = NewsRepositoryImpl(newsApi, sharedPreferences)
 
+    // Checks if repository.getTopHeadlines returns correct Result when API call is successful
     @Test
     fun `API call is successful`() = runBlocking {
 
@@ -43,6 +44,7 @@ class NewsRepositoryUnitTest {
         }
     }
 
+    // Checks if repository.getTopHeadlines returns correct Result when retrofit throws exception
     @Test
     fun `API call threw exception`() = runBlocking {
 
@@ -60,6 +62,7 @@ class NewsRepositoryUnitTest {
         }
     }
 
+    // Checks if repository.getTopHeadlines returns correct result when api returns error
     @Test
     fun `API call returned error`() = runBlocking {
 

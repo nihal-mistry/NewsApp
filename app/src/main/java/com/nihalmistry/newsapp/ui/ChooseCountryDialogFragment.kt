@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import com.nihalmistry.newsapp.R
 import com.nihalmistry.newsapp.databinding.FragmentChooseCountryDialogBinding
 import com.nihalmistry.newsapp.databinding.ItemCountryDialogListBinding
 import com.nihalmistry.newsapp.di.USER_PREFS
@@ -72,7 +71,9 @@ class ChooseCountryDialogFragment : BottomSheetDialogFragment() {
             holder.tvCountry.text = country
             holder.ivCountryFlag.setImageResource(COUNTRY_FLAG_MAP.get(country)!!)
             holder.itemView.setOnClickListener {
-                prefs.edit().putString(Constants.COUNTRY_KEY, countries[holder.bindingAdapterPosition]).commit()
+                prefs.edit()
+                    .putString(Constants.COUNTRY_KEY, countries[holder.bindingAdapterPosition])
+                    .commit()
                 dismiss()
             }
         }
